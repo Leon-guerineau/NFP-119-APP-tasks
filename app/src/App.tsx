@@ -1,11 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC} from 'react';
+import logo from './assets/logo.svg';
+import './css/App.css';
+import Title from "./components/Title";
 
-function App() {
+const App : FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <Title title='Application de gestion de Tâches' subtitle='Liste des utilisateurs'/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
