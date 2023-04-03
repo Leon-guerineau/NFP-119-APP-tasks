@@ -3,12 +3,13 @@ version: '3'
 services:
 
   node:
+    container_name: NFP-119-APP-Tasks-node
     image: node:19.7-alpine3.16
     working_dir: /usr/src/app
     # Commande pour garder le container occuper pour qu'il reste ouvert
     # La commande peut etre remplacee par nodemon s'il est mis en place
     command: tail -f /dev/null
     ports:
-      - '8080:8080'
+      - '80:80'
     volumes:
       - ./app:/usr/src/app

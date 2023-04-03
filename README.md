@@ -16,7 +16,7 @@ docker-compose down
 - ### Ouvrir le container dans un terminal
 
 ```Shell
-docker exec -it (nom du container) sh
+docker exec -it NFP-119-APP-Tasks-node sh
 ```
 
 - ### Sortir du terminal
