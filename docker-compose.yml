@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  node:
+    image: node:19.7-alpine3.16
+    working_dir: /usr/src/app
+    # Commande pour garder le container occuper pour qu'il reste ouvert
+    # La commande peut etre remplacee par nodemon s'il est mis en place
+    command: tail -f /dev/null
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./app:/usr/src/app
