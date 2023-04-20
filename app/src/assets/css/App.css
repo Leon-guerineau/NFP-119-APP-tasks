@@ -2,8 +2,6 @@
   text-align: center;
 }
 
-
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -24,15 +22,14 @@
   color: #61dafb;
 }
 
-
 .hero {
   padding: 60px;
   text-align: center;
   background: #1abc9c;
   color: white;
   font-size: 30px;
+}
 
-} 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -61,14 +58,13 @@ tbody>tr:hover {
   background-color: rgb(168, 206, 241);
 }
 
-
 .iconButton {
-  
+
   background-color: Transparent;
   background-repeat:no-repeat;
   border: none;
   cursor:pointer;
-  overflow: hidden;  
+  overflow: hidden;
   color : navy;
   font-size: 20px;
 }
@@ -76,8 +72,6 @@ tbody>tr:hover {
 .iconButton:hover {
   background-color: #c2cad8;
 }
-
-
 
 .modal {
   position: fixed;
@@ -143,7 +137,6 @@ button {
   margin: 10px 0;
   margin-left : 50px;
 }
-
 
 .center {
   margin-left: auto;

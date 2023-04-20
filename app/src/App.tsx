@@ -1,34 +1,18 @@
-import { FC } from 'react';
-
-import './assets/css/App.css';
-import Header from './components/Header';
-import Navbar from './components/NavBar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {FC} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home'
-
+import Layout from "./components/Layout";
 
 const App: FC = () => {
-
-
-  return (
-
-    <div className="App">
-
-     
-        <div>
-
-        <Header />
-        <Navbar />
-        </div>
-        
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-     
-
-    </div>
-
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route path="/" element={<Home/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

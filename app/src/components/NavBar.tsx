@@ -4,9 +4,7 @@ import '../assets/css/Navbar.css';
 
 const Navbar: FC = () => {
     return (
-
         <nav className='sticky'>
-
             <ul >
                 <li>
                     <Link to="/" >
@@ -18,11 +16,8 @@ const Navbar: FC = () => {
                         Les Tâches
                     </Link>
                 </li>
-
             </ul>
         </nav>
-
-
     );
 }
 
