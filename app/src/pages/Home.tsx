@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ListUsers from '../components/ListUsers';
+import ListUsers from '../components/User/ListUsers';
 
 interface HomeProps {
     title: string;

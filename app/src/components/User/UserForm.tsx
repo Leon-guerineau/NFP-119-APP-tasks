@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import User from "../../types/User";
 
 interface FormProps {
   onSubmit: (formData: FormData) => void;
+  user?: User | null;
 }
 
 interface FormData {
@@ -9,15 +11,21 @@ interface FormData {
   email: string;
 }
 
-const UserForm = ({ onSubmit }: FormProps) => {
+const UserForm = ({ onSubmit, user = null }: FormProps) => {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
+    name: '',
+    email: '',
   });
+  if (user) {
+    setFormData({
+      name: user.name? user.name.toString() : '',
+      email: user? user.email.toString() : '',
+    });
+  }
+  console.log(formData);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(value);
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
