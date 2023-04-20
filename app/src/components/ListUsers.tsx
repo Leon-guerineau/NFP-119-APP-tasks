@@ -1,23 +1,41 @@
 import { FC, useState, useEffect } from 'react';
+import {IoPencilSharp, IoTrashBinSharp, IoNewspaperSharp} from 'react-icons/io5';
+import {getUsers, addUser, deleteUser} from '../services/user.service';
+import { confirmAlert } from 'react-confirm-alert';
 import User from "../types/User";
-import { getUsers, addUser } from '../services/user.service';
 import Modal from './Modal';
 import UserForm from './UserForm';
-import {IoEyeSharp, IoAddCircle} from 'react-icons/io5';
-interface ListUserProps {
-  title: string;
-}
 
-const ListUsers: FC<ListUserProps> = ({ title }: ListUserProps) => {
+const ListUsers: FC = () => {
   const [users, setUsers] = useState<User[] | null>([]);
   const onclick = () => { alert('click button') };
   const [isOpenForm, setOpenForm] = useState(false);
   const [refresh, setRefresh] = useState(0);
 
+  const submit = (user: User) =>
+  {
+    confirmAlert({
+      title: 'Confirm to delete Dependent',
+      message: `Are you sure you want to delete ${user?.name}?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            deleteUser(user);
+            setRefresh(refresh+1);
+          }
+        },
+        {
+          label: 'No',
+          onClick: () =>  null
+        }
+      ]
+    });
+  }
+
   useEffect(() => {
-
-    const getData = async () => {
-
+    async function getData()
+    {
       const users: User[] = await getUsers();
       console.log(users);
       setUsers(users);
@@ -32,15 +50,11 @@ const ListUsers: FC<ListUserProps> = ({ title }: ListUserProps) => {
       const user = await addUser(userAdd);
       setRefresh(refresh+1);
     }
-
     add(formData);
-
   }
 
   return (
     <div>
-      <h3>{title}</h3>
-
       <div>
         <button onClick={() => setOpenForm(true)}>Ajouter un utilisateur</button>
         <Modal
@@ -55,29 +69,34 @@ const ListUsers: FC<ListUserProps> = ({ title }: ListUserProps) => {
         <thead>
           <tr>
             <th>Nom</th>
-            <th>Prenom</th>
-            <th>Gestion des tâches</th>
+            <th>Mail</th>
+            <th>Actions</th>
           </tr>
-
         </thead>
+
         <tbody>
-          {users?.map((val, key) => {
-            return (
+        {users?.map((val, key) => {
+          return (
               <tr key={key}>
                 <td>{val.name}</td>
                 <td>{val.email}</td>
-                <td><button className='iconButton'><IoEyeSharp /></button><button className='iconButton'><IoAddCircle /></button></td>
-
+                <td>
+                  <button className='iconButton'>
+                    <IoNewspaperSharp/>
+                  </button>
+                  <button className='iconButton' >
+                    <IoPencilSharp/>
+                  </button>
+                  <button className='iconButton' onClick={() => submit(val)}>
+                    <IoTrashBinSharp/>
+                  </button>
+                </td>
               </tr>
-            )
-          })}
+          )
+        })}
         </tbody>
       </table>
-
     </div>
-
-
-
   )
 }
 

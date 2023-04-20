@@ -1,7 +1,7 @@
 
 import User from '../types/User';
 
-const getUsers = async ()=>{
+export const getUsers = async ()=>{
    
     try {
     const response = await fetch('http://localhost:8080/users');
@@ -9,12 +9,11 @@ const getUsers = async ()=>{
 
     return users;
     }  catch (error) {
-        // traitement erreur
-        console.log(error)
+        console.log(error) // TODO : handle error
     } 
 }
 
-const addUser = async (user : User)=>{
+export const addUser = async (user : User)=>{
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -24,11 +23,15 @@ const addUser = async (user : User)=>{
         const response =  await fetch('http://localhost:8080/users', requestOptions);
         const userSave = await response.json();
         return userSave;
-    } catch(e) {
-        console.log(e)
+    } catch(error) {
+        console.log(error) // TODO : handle error
     }
-
-   
 }
 
-export {getUsers, addUser}
+export const deleteUser = async (user: User) => {
+    try {
+        await fetch('http://localhost:8080/users/' + user._id, {method: 'DELETE'});
+    } catch (error) {
+        console.log(error) // TODO : handle error
+    }
+}

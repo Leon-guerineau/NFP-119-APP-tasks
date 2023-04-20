@@ -8,7 +8,7 @@ const App: FC = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/" element={<Home title="Liste des utilisateurs"/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

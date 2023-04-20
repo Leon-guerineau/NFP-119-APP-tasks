@@ -1,10 +1,15 @@
 import { FC } from "react";
 import ListUsers from '../components/ListUsers';
 
-const Home: FC = () => {
+interface HomeProps {
+    title: string;
+}
+
+const Home: FC<HomeProps> = ({ title }: HomeProps) => {
     return (
         <div>
-            <ListUsers title="Liste des utilisateurs" />
+            <h3>{title}</h3>
+            <ListUsers/>
         </div>
     )
 }
