@@ -1,8 +1,13 @@
-import React, {FC} from "react";
 
-const Footer : FC = () => {
+import { FC } from "react";
+
+
+const Footer:FC = () => {
+    
     return (
-        <h1>Footer</h1>
+    
+        <h1>footer</h1>
+     
     )
 }
 

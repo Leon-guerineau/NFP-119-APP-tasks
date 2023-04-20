@@ -1,8 +1,16 @@
-import React, {FC} from "react";
 
-const Header : FC = () => {
+import { FC } from "react";
+
+
+const Header: FC = () => {
+
     return (
-        <h1>Header</h1>
+
+        <div className="hero">
+            <h1>gestion utilisateurs tâches</h1>
+           
+        </div>
+
     )
 }
 
