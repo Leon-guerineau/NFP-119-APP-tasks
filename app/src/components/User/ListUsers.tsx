@@ -98,7 +98,7 @@ const ListUsers: FC = () => {
                                         isOpen={isOpenUpdateForm}
                                         onClose={() => setOpenUpdateForm(false)}
                                         title="Modifier un utilisateur"
-                                        content={<UserForm onSubmit={sendUpdateUser}/>}
+                                        content={<UserForm onSubmit={sendUpdateUser} user={val}/>}
                                     />
                                     <button className='iconButton' onClick={() => alertDeleteUser(val)} title="Supprimer">
                                         <IoTrashBinSharp/>

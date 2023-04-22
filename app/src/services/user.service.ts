@@ -4,11 +4,9 @@ const getUsers = async () => {
 
     try {
         const response = await fetch('http://localhost:8080/users');
-        const users = await response.json();
-
-        return users;
+        return await response.json();
     } catch (error) {
-        console.log(error) // TODO : handle error
+        console.log(error);
     }
 }
 
@@ -22,7 +20,7 @@ const createUser = async (user: User) => {
         const response = await fetch('http://localhost:8080/users', requestOptions);
         return await response.json();
     } catch (error) {
-        console.log(error) // TODO : handle error
+        console.log(error);
     }
 }
 
@@ -31,30 +29,30 @@ const getUser = async (userId: any) => {
         const response = await fetch('http://localhost:8080/users/'+ userId);
         return await response.json();
     } catch (error) {
-        console.log(error) // TODO : handle error
+        console.log(error);
     }
 }
 
-const updateUser = async (user: User): Promise<any> => {
+const updateUser = async (user: User) => {
     const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
     try {
-        const response: Response = await fetch('http://localhost:8080/users'+ user._id, requestOptions);
+        const response: Response = await fetch('http://localhost:8080/users/'+ user._id, requestOptions);
         return await response.json();
     } catch (error) {
-        console.log(error) // TODO : handle error
+        console.log(error);
     }
 }
 
-const deleteUser = async (user: User): Promise<void> =>
+const deleteUser = async (user: User) =>
 {
     try {
         await fetch('http://localhost:8080/users/' + user._id, {method: 'DELETE'});
     } catch (error) {
-        console.log(error) // TODO : handle error
+        console.log(error);
     }
 }
 export {getUsers, createUser, getUser, updateUser, deleteUser};
