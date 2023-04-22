@@ -1,14 +1,10 @@
 import { FC } from "react";
 import ListUsers from '../components/User/ListUsers';
 
-interface HomeProps {
-    title: string;
-}
-
-const Home: FC<HomeProps> = ({ title }: HomeProps) => {
+const Home: FC = () => {
     return (
         <div>
-            <h3>{title}</h3>
+            <h3>Liste des utilisateurs</h3>
             <ListUsers/>
         </div>
     )

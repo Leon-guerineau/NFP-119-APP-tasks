@@ -1,6 +1,6 @@
 import User from '../types/User';
 
-export const getUsers = async () => {
+const getUsers = async () => {
 
     try {
         const response = await fetch('http://localhost:8080/users');
@@ -12,7 +12,7 @@ export const getUsers = async () => {
     }
 }
 
-export const createUser = async (user: User) => {
+const createUser = async (user: User) => {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -26,8 +26,16 @@ export const createUser = async (user: User) => {
     }
 }
 
-export async function updateUser(user: User): Promise<any>
-{
+const getUser = async (userId: any) => {
+    try {
+        const response = await fetch('http://localhost:8080/users/'+ userId);
+        return await response.json();
+    } catch (error) {
+        console.log(error) // TODO : handle error
+    }
+}
+
+const updateUser = async (user: User): Promise<any> => {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -41,7 +49,7 @@ export async function updateUser(user: User): Promise<any>
     }
 }
 
-export async function deleteUser(user: User): Promise<void>
+const deleteUser = async (user: User): Promise<void> =>
 {
     try {
         await fetch('http://localhost:8080/users/' + user._id, {method: 'DELETE'});
@@ -49,3 +57,4 @@ export async function deleteUser(user: User): Promise<void>
         console.log(error) // TODO : handle error
     }
 }
+export {getUsers, createUser, getUser, updateUser, deleteUser};
