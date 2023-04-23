@@ -12,7 +12,7 @@ const Navbar: FC = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/taches">
+                    <Link to="/tasks">
                         Les Tâches
                     </Link>
                 </li>

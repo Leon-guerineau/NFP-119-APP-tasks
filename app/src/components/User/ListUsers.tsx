@@ -5,11 +5,12 @@ import {confirmAlert} from 'react-confirm-alert';
 import User from "../../types/User";
 import Modal from '../Modal';
 import UserForm from './UserForm';
+import {Link} from "react-router-dom";
 
 const ListUsers: FC = () => {
     const [users, setUsers] = useState<User[] | null>([]);
     const [isOpenForm, setOpenForm] = useState(false);
-    const [isOpenUpdateForm, setOpenUpdateForm] = useState(false);
+    const [isOpenUpdateForm, setOpenUpdateForm] = useState('');
     const [refresh, setRefresh] = useState(0);
     const onclick = () => {
         alert('click button')
@@ -54,7 +55,7 @@ const ListUsers: FC = () => {
     }
 
     const sendUpdateUser = (formData: any) => {
-        setOpenUpdateForm(false);
+        setOpenUpdateForm('');
         const update = async (userUpdate: User) => {
             await updateUser(userUpdate);
             setRefresh(refresh + 1);
@@ -88,18 +89,22 @@ const ListUsers: FC = () => {
                                 <td>{val.name}</td>
                                 <td>{val.email}</td>
                                 <td>
-                                    <button className='iconButton' title="Lister les taĉhes">
-                                        <IoNewspaperSharp/>
-                                    </button>
-                                    <button className='iconButton' onClick={() => setOpenUpdateForm(true)} title="Modifier">
+                                    <Link to={'/users/' + val._id + '/tasks'}>
+                                        <button className='iconButton' title="Lister les taĉhes">
+                                            <IoNewspaperSharp/>
+                                        </button>
+                                    </Link>
+
+                                    <button className='iconButton' onClick={() => setOpenUpdateForm(val._id)} title="Modifier">
                                         <IoPencilSharp/>
                                     </button>
                                     <Modal
-                                        isOpen={isOpenUpdateForm}
-                                        onClose={() => setOpenUpdateForm(false)}
+                                        isOpen={isOpenUpdateForm === val._id}
+                                        onClose={() => setOpenUpdateForm('')}
                                         title="Modifier un utilisateur"
                                         content={<UserForm onSubmit={sendUpdateUser} user={val}/>}
                                     />
+
                                     <button className='iconButton' onClick={() => alertDeleteUser(val)} title="Supprimer">
                                         <IoTrashBinSharp/>
                                     </button>
