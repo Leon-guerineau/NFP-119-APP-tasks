@@ -1,18 +1,23 @@
 import {FC} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from './pages/Home'
-import Layout from "./components/Layout";
-import UserTasks from "./pages/UserTasks";
-import Tasks from "./pages/Task/Tasks";
+import Layout from './components/Layout';
+import UserList from './pages/UserList'
+import TaskList from './pages/TaskList';
+import TaskListByUser from "./pages/TaskListByUser";
 
 const App: FC = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/users/:userId/tasks" element={<UserTasks/>}/>
-                    <Route path="/tasks" element={<Tasks/>}/>
+                    {/*Liste des utilisateurs*/}
+                    <Route path="/" element={<UserList/>}/>
+
+                    {/*Liste des tâches*/}
+                    <Route path="/tasks" element={<TaskList/>}/>
+
+                    {/*Liste des tâches pour un utilisateur*/}
+                    <Route path="/users/:userId/tasks" element={<TaskListByUser/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

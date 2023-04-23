@@ -8,7 +8,7 @@ import TaskTable from "../components/Task/TaskTable";
 import Modal from "../components/Modal";
 import TaskForm from "../components/Task/TaskForm";
 
-const UserTasks: FC = () => {
+const TaskListByUser: FC = () => {
     const {userId} = useParams();
     const [user, setUser] = useState<User|null>(null);
     const [tasks, setTasks] =  useState<Task[]>([]);
@@ -58,4 +58,4 @@ const UserTasks: FC = () => {
     )
 }
 
-export default UserTasks;
+export default TaskListByUser;

@@ -1,5 +1,4 @@
 import Task from "../types/Task";
-import User from "../types/User";
 
 const getTasks = async () => {
     const requestOptions = {

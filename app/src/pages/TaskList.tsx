@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
-import TaskTable from "../../components/Task/TaskTable";
-import Task from "../../types/Task";
-import {getTasks} from "../../services/task.service";
+import TaskTable from "../components/Task/TaskTable";
+import Task from "../types/Task";
+import {getTasks} from "../services/task.service";
 
-const Tasks: FC = () => {
+const TaskList: FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -22,4 +22,4 @@ const Tasks: FC = () => {
     )
 }
 
-export default Tasks;
+export default TaskList;
