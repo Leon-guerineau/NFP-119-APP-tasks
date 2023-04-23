@@ -1,6 +1,7 @@
 import Task from "../types/Task";
 
-const getTasks = async () => {
+export async function getTasks()
+{
     const requestOptions = {
         method: 'GET',
     };
@@ -12,7 +13,8 @@ const getTasks = async () => {
     }
 }
 
-const getTasksByUserId = async (userId: any) => {
+export async function getTasksByUserId(userId: any)
+{
     const requestOptions = {
         method: 'GET',
     };
@@ -24,7 +26,8 @@ const getTasksByUserId = async (userId: any) => {
     }
 }
 
-const createTask = async (task: Task) => {
+export async function createTask(task: Task)
+{
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -38,7 +41,8 @@ const createTask = async (task: Task) => {
     }
 }
 
-const updateTask = async (task: Task) => {
+export async function updateTask(task: Task)
+{
     const requestOptions = {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -52,7 +56,8 @@ const updateTask = async (task: Task) => {
     }
 }
 
-const deleteTask = async (task: Task) => {
+export async function deleteTask(task: Task)
+{
     const requestOptions = {
         method: 'DELETE',
     };
@@ -62,5 +67,3 @@ const deleteTask = async (task: Task) => {
         console.log(error);
     }
 }
-
-export {getTasks, getTasksByUserId, createTask, deleteTask, updateTask};

@@ -4,7 +4,7 @@ import ListUsers from '../components/User/ListUsers';
 const UserList: FC = () => {
     return (
         <div>
-            <h3>Liste des utilisateurs</h3>
+            <h2>Liste des utilisateurs</h2>
             <ListUsers/>
         </div>
     )

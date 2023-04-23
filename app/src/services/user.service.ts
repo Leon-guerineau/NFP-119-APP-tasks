@@ -1,6 +1,7 @@
 import User from '../types/User';
 
-const getUsers = async () => {
+export async function getUsers()
+{
     const requestOptions = {
         method: 'GET',
     };
@@ -12,7 +13,8 @@ const getUsers = async () => {
     }
 }
 
-const createUser = async (user: User) => {
+export async function createUser(user: User)
+{
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -26,7 +28,8 @@ const createUser = async (user: User) => {
     }
 }
 
-const getUser = async (userId: any) => {
+export async function getUser(userId: any)
+{
     const requestOptions = {
         method: 'GET',
     };
@@ -38,7 +41,8 @@ const getUser = async (userId: any) => {
     }
 }
 
-const updateUser = async (user: User) => {
+export async function updateUser(user: User)
+{
     const requestOptions = {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -53,7 +57,8 @@ const updateUser = async (user: User) => {
     }
 }
 
-const deleteUser = async (user: User) => {
+export async function deleteUser(user: User)
+{
     const requestOptions = {
         method: 'DELETE',
     };
@@ -63,5 +68,3 @@ const deleteUser = async (user: User) => {
         console.log(error);
     }
 }
-
-export {getUsers, createUser, getUser, updateUser, deleteUser};

@@ -6,6 +6,7 @@ import {getTasks} from "../services/task.service";
 const TaskList: FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    // Récupération des tâches
     useEffect(() => {
         async function getData() {
             const tasks: Task[] = await getTasks();
@@ -16,7 +17,7 @@ const TaskList: FC = () => {
 
     return (
         <div>
-            <h3>Liste des tâches</h3>
+            <h2>Liste des tâches</h2>
             <TaskTable tasks={tasks}/>
         </div>
     )

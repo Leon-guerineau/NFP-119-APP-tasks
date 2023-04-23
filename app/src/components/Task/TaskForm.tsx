@@ -8,14 +8,6 @@ interface FormProps {
     userId?: string;
 }
 
-function formatDate(date?: Date): string {
-    let formatedDate = new Date().toISOString().split("T")[0];
-    if (date) {
-        formatedDate = new Date(date).toISOString().split("T")[0];
-    }
-    return formatedDate;
-}
-
 interface FormData {
     _id?: string | null;
     userId: string;
@@ -38,18 +30,26 @@ const TaskForm = ({onSubmit, task, userId}: FormProps) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
 
-        if (event.target.name === 'finished') {
-            console.log(event.target.checked)
-            setFormData((prevFormData) => ({...prevFormData, [name]: event.target.checked}));
-        } else if (event.target.name === 'createdAt') {
-            setFormData((prevFormData) => ({...prevFormData, [name]: new Date(event.target.value.toString())}));
-        } else {
-            setFormData((prevFormData) => ({...prevFormData, [name]: value}));
+        // Traitement de l'input ciblé
+        switch (event.target.name) {
+            // S'il s'agit de 'finished' alors on attribue au formData son 'checked' au lieu de son 'value'
+            case 'finished':
+                setFormData({...formData, finished: event.target.checked});
+                break;
+
+            // S'il s'agit de 'createdAt' alors on attribue au formData sa 'value' convertie en Date
+            case 'createdAt':
+                setFormData({...formData, createdAt: new Date(value)});
+                break;
+
+            // Le reste des cas passent normalement
+            default:
+                setFormData({...formData, [name]: value});
+                break;
         }
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        console.log('submit', formData)
         event.preventDefault();
         onSubmit(formData);
         setFormData({
@@ -80,7 +80,13 @@ const TaskForm = ({onSubmit, task, userId}: FormProps) => {
 
             <label>
                 Date de création :
-                <input type="date" name="createdAt" value={new Date(formData.createdAt).toISOString().split("T")[0]} onChange={handleChange}/>
+                {/*
+                    Conversion de la date en string format 'YYYY-MM-DD' :
+                        - toISOString() : convertie au format 'YYYY-MM-DDTHH:mm:ss.sssZ'
+                        - split('T') : sépare la chaîne au niveau du 'T' : ['YYYY-MM-DD', 'YYYY-MM-DDZ']
+                        - [0] : récupère le premier élément du tableau : 'YYYY-MM-DD'
+                */}
+                <input type="date" name="createdAt" value={formData.createdAt.toISOString().split("T")[0]} onChange={handleChange}/>
             </label>
 
             <button type="submit">Envoyer</button>

@@ -12,9 +12,6 @@ const ListUsers: FC = () => {
     const [isOpenForm, setOpenForm] = useState(false);
     const [isOpenUpdateForm, setOpenUpdateForm] = useState('');
     const [refresh, setRefresh] = useState(0);
-    const onclick = () => {
-        alert('click button')
-    };
 
     const alertDeleteUser = (user: User) => {
         confirmAlert({
@@ -29,8 +26,7 @@ const ListUsers: FC = () => {
                     }
                 },
                 {
-                    label: 'Non',
-                    onClick: () => null
+                    label: 'Non'
                 }
             ]
         });
@@ -45,13 +41,13 @@ const ListUsers: FC = () => {
     }, [refresh]);
 
 
-    const sendNewUser = (formData: any) => {
+    const sendNewUser = (userData: any) => {
         setOpenForm(false);
         const add = async (userAdd: User) => {
             const user = await createUser(userAdd);
             setRefresh(refresh + 1);
         }
-        add(formData);
+        add(userData);
     }
 
     const sendUpdateUser = (formData: any) => {
