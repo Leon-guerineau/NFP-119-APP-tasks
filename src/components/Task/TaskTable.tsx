@@ -1,20 +1,16 @@
 import {FC, useEffect, useState} from 'react';
-import {IoPencilSharp} from "react-icons/io5";
 import {Link} from 'react-router-dom';
-import {updateTask} from "../../services/task.service";
 import {getUser} from "../../services/user.service";
-import Modal from "../Modal";
-import TaskForm from "./TaskForm";
 import Task from "../../types/Task";
 import User from "../../types/User";
 import TaskDeleteButton from "./TaskDeleteButton";
+import TaskUpdateButton from "./TaskUpdateButton";
 
 interface Props {
     tasks: Task[];
 }
 
 const TaskTable: FC<Props> = ({ tasks }: Props) => {
-    const [isOpenUpdateForm, setOpenUpdateForm] = useState('');
     const [users, setUsers] = useState<User[]>([]);
 
     // Récupération des utilisateurs de chaque tâche
@@ -25,16 +21,6 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
         }
         fetchUsers();
     });
-
-    // Mise à jour d'une tâche
-    const sendUpdateTask = (formData: any) => {
-        setOpenUpdateForm('');
-        const update = async (taskUpdate: Task) => {
-            await updateTask(taskUpdate);
-            window.location.reload();
-        }
-        update(formData);
-    }
 
     // Retour du tableau de tâches
     return (
@@ -79,26 +65,16 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
 
                                 {/* Actions de la tâche */}
                                 <td>
-                                    {/* Boutton de modification */}
-                                    <button className='iconButton' onClick={() => setOpenUpdateForm(task._id)} title="Modifier">
-                                        <IoPencilSharp/>
-                                    </button>
-                                    <Modal
-                                        isOpen={isOpenUpdateForm === task._id}
-                                        onClose={() => setOpenUpdateForm('')}
-                                        title="Modifier un utilisateur"
-                                        content={<TaskForm onSubmit={sendUpdateTask} task={task} userId={task.userId}/>}
-                                    />
-
+                                    <TaskUpdateButton task={task}/>
                                     <TaskDeleteButton task={task}/>
                                 </td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
         </div>
-    )
+    );
 }
 
-export default TaskTable
+export default TaskTable;

@@ -26,7 +26,7 @@ const UserTable: FC<Props> = ({users}: Props) => {
                 </tr>
             </thead>
             <tbody>
-                {/* Affichage des lignes d'utilisateurs */}
+                {/* Affichage des lignes utilisateur */}
                 {users?.map((user, key) => {
                     return (
                         <tr key={key}>

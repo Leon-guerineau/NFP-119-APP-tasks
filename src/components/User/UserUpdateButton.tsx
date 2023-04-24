@@ -22,7 +22,7 @@ const UserUpdateButton: FC<Props> = ({user}: Props) => {
         update(formData);
     }
 
-    // Affichage du tableau d'utilisateurs
+    // Affichage du bouton de modification d'un utilisateur
     return (
         <span>
             <button className='iconButton' onClick={() => setOpenForm(user._id)} title="Modifier">
