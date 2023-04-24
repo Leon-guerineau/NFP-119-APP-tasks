@@ -1,13 +1,13 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import {FC} from 'react';
+import {Link} from 'react-router-dom';
 import '../assets/css/Navbar.css';
 
 const Navbar: FC = () => {
     return (
         <nav className='sticky'>
-            <ul >
+            <ul>
                 <li>
-                    <Link to="/" >
+                    <Link to="/">
                         Les Utilisateurs
                     </Link>
                 </li>

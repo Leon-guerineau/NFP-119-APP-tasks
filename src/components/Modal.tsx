@@ -1,5 +1,4 @@
-
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 
 type ModalProps = {
     isOpen: boolean;
@@ -8,8 +7,7 @@ type ModalProps = {
     content: ReactNode;
 };
 
-
-const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
+const Modal = ({isOpen, onClose, title, content}: ModalProps) => {
     return (
         <>
             {isOpen && (
