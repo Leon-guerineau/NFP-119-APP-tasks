@@ -14,7 +14,7 @@ const UserDeleteButton: FC<Props> = ({user}: Props) => {
     const alertDeleteUser = (user: User) => {
         confirmAlert({
             title: 'Confirmation de suppression',
-            message: `Êtes vous sûr de vouloir supprimer l'utilisateur : ${user?.name} (${user?.email}) ?`,
+            message: `Êtes vous sûr de vouloir supprimer l'utilisateur : ${user.name} (${user.email}) ?`,
             buttons: [
                 {
                     label: 'Oui',
@@ -30,7 +30,7 @@ const UserDeleteButton: FC<Props> = ({user}: Props) => {
         });
     }
 
-    // Affichage du tableau d'utilisateurs
+    // Affichage du bouton de suppression d'un utilisateur
     return (
         <button className='iconButton' onClick={() => alertDeleteUser(user)} title="Supprimer">
             <IoTrashBinSharp/>

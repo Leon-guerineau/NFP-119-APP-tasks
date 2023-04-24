@@ -64,17 +64,32 @@ const TaskForm = ({onSubmit, task, userId}: FormProps) => {
         <form onSubmit={handleSubmit}>
             <label>
                 Nom :
-                <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+                <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                />
             </label>
 
             <label>
                 Détail :
-                <input type="text" name="detail" value={formData.detail} onChange={handleChange}/>
+                <input
+                    type="text"
+                    name="detail"
+                    value={formData.detail}
+                    onChange={handleChange}
+                />
             </label>
 
             <label>
                 Terminée :
-                <input type="checkbox" name="finished" onChange={handleChange} defaultChecked={formData.finished}/>
+                <input
+                    type="checkbox"
+                    name="finished"
+                    onChange={handleChange}
+                    defaultChecked={formData.finished}
+                />
             </label>
 
             <label>
@@ -85,7 +100,12 @@ const TaskForm = ({onSubmit, task, userId}: FormProps) => {
                         - split('T') : sépare la chaîne au niveau du 'T' : ['YYYY-MM-DD', 'YYYY-MM-DDZ']
                         - [0] : récupère le premier élément du tableau : 'YYYY-MM-DD'
                 */}
-                <input type="date" name="createdAt" value={formData.createdAt.toISOString().split("T")[0]} onChange={handleChange}/>
+                <input
+                    type="date"
+                    name="createdAt"
+                    value={formData.createdAt.toISOString().split("T")[0]}
+                    onChange={handleChange}
+                />
             </label>
 
             <button type="submit">Envoyer</button>

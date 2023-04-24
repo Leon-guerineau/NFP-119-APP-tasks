@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from 'react';
-import {IoPencilSharp, IoTrashBinSharp} from "react-icons/io5";
+import {IoPencilSharp} from "react-icons/io5";
 import {Link} from 'react-router-dom';
-import {confirmAlert} from "react-confirm-alert";
-import {deleteTask, updateTask} from "../../services/task.service";
+import {updateTask} from "../../services/task.service";
 import {getUser} from "../../services/user.service";
 import Modal from "../Modal";
 import TaskForm from "./TaskForm";
 import Task from "../../types/Task";
 import User from "../../types/User";
+import TaskDeleteButton from "./TaskDeleteButton";
 
 interface Props {
     tasks: Task[];
@@ -25,27 +25,6 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
         }
         fetchUsers();
     });
-
-    // Alerte de confirmation de suppression d'une tâche
-    const alertDeleteTask = (task: Task) => {
-        confirmAlert({
-            title: 'Confirmation de suppression',
-            message: `Êtes vous sûr de vouloir supprimer la tâche : ${task?.name} ?`,
-            buttons: [
-                {
-                    label: 'Oui',
-                    onClick: () => {
-                        deleteTask(task);
-                        window.location.reload();
-                    }
-                },
-                {
-                    label: 'Non',
-                    onClick: () => null
-                }
-            ]
-        });
-    }
 
     // Mise à jour d'une tâche
     const sendUpdateTask = (formData: any) => {
@@ -111,10 +90,7 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
                                         content={<TaskForm onSubmit={sendUpdateTask} task={task} userId={task.userId}/>}
                                     />
 
-                                    {/* Boutton de suppression */}
-                                    <button className='iconButton' onClick={() => alertDeleteTask(task)} title="Supprimer">
-                                        <IoTrashBinSharp/>
-                                    </button>
+                                    <TaskDeleteButton task={task}/>
                                 </td>
                             </tr>
                         )
