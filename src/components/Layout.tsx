@@ -9,7 +9,7 @@ const Layout: FC = () => {
             <Header/>
             <Outlet/>
         </div>
-    )
+    );
 }
 
 export default Layout;

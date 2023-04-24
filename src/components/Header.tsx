@@ -1,7 +1,7 @@
-import { FC } from "react";
+import {FC} from "react";
 import Navbar from "./NavBar";
 
-const Header:FC = () => {
+const Header: FC = () => {
     return (
         <div>
             <div className="hero">
@@ -9,7 +9,7 @@ const Header:FC = () => {
             </div>
             <Navbar/>
         </div>
-    )
+    );
 }
 
 export default Header;

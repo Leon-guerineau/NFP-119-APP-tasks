@@ -1,5 +1,5 @@
 import {FC, useState} from 'react';
-import {createUser} from '../../services/user.service';
+import * as UserService from '../../services/user.service';
 import User from "../../types/User";
 import Modal from '../Modal';
 import UserForm from './UserForm';
@@ -11,7 +11,7 @@ const UserCreateButton: FC = () => {
     const sendNewUser = (userData: any) => {
         setOpenForm(false);
         const addUser = async (user: User) => {
-            await createUser(user);
+            await UserService.createUser(user);
             window.location.reload();
         }
         addUser(userData);
@@ -28,7 +28,7 @@ const UserCreateButton: FC = () => {
                 content={<UserForm onSubmit={sendNewUser}/>}
             />
         </div>
-    )
+    );
 }
 
 export default UserCreateButton;

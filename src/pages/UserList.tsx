@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import User from "../types/User";
-import {getUsers} from "../services/user.service";
+import * as UserService from "../services/user.service";
 import UserCreateButton from "../components/User/UserCreateButton";
 import UserTable from "../components/User/UserTable";
 
@@ -10,9 +10,10 @@ const UserList: FC = () => {
     // Récupération des utilisateurs
     useEffect(() => {
         async function getData() {
-            const users: User[] = await getUsers();
+            const users: User[] = await UserService.getUsers();
             setUsers(users);
         }
+
         getData();
     });
 

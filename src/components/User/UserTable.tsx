@@ -1,17 +1,18 @@
 import {FC} from 'react';
+import {Link} from "react-router-dom";
 import {IoNewspaperSharp} from 'react-icons/io5';
 import User from "../../types/User";
-import {Link} from "react-router-dom";
 import UserDeleteButton from "./UserDeleteButton";
 import UserUpdateButton from "./UserUpdateButton";
 
 interface Props {
     users: User[];
 }
-const UserTable: FC<Props> = ({users}:Props) => {
+
+const UserTable: FC<Props> = ({users}: Props) => {
     // Affichage s'il n'y a aucun utilisateur
     if (users.length === 0) {
-        return (<h1>Aucun utilisateur</h1>)
+        return (<h1>Aucun utilisateur</h1>);
     }
 
     // Affichage du tableau d'utilisateurs
@@ -41,11 +42,11 @@ const UserTable: FC<Props> = ({users}:Props) => {
                                 <UserDeleteButton user={user}/>
                             </td>
                         </tr>
-                    )
+                    );
                 })}
             </tbody>
         </table>
-    )
+    );
 }
 
 export default UserTable;
