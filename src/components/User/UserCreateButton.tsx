@@ -17,7 +17,7 @@ const UserCreateButton: FC = () => {
         addUser(userData);
     }
 
-    // Retour du boutton
+    // Affichage du bouton de création d'un utilisateur
     return (
         <div>
             <button onClick={() => setOpenForm(true)}>Ajouter un utilisateur</button>

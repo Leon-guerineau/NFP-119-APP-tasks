@@ -1,60 +1,20 @@
-import {FC, useEffect, useState} from 'react';
-import {IoPencilSharp, IoTrashBinSharp} from "react-icons/io5";
+import {FC} from 'react';
 import {Link} from 'react-router-dom';
-import {confirmAlert} from "react-confirm-alert";
-import {deleteTask, updateTask} from "../../services/task.service";
-import {getUser} from "../../services/user.service";
-import Modal from "../Modal";
-import TaskForm from "./TaskForm";
 import Task from "../../types/Task";
 import User from "../../types/User";
+import TaskDeleteButton from "./TaskDeleteButton";
+import TaskUpdateButton from "./TaskUpdateButton";
 
 interface Props {
     tasks: Task[];
+    users: User[];
 }
 
-const TaskTable: FC<Props> = ({ tasks }: Props) => {
-    const [isOpenUpdateForm, setOpenUpdateForm] = useState('');
-    const [users, setUsers] = useState<User[]>([]);
+const TaskTable: FC<Props> = ({tasks, users}: Props) => {
 
-    // Récupération des utilisateurs de chaque tâche
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const users = await Promise.all(tasks.map(task => getUser(task.userId)));
-            setUsers(users);
-        }
-        fetchUsers();
-    });
-
-    // Alerte de confirmation de suppression d'une tâche
-    const alertDeleteTask = (task: Task) => {
-        confirmAlert({
-            title: 'Confirmation de suppression',
-            message: `Êtes vous sûr de vouloir supprimer la tâche : ${task?.name} ?`,
-            buttons: [
-                {
-                    label: 'Oui',
-                    onClick: () => {
-                        deleteTask(task);
-                        window.location.reload();
-                    }
-                },
-                {
-                    label: 'Non',
-                    onClick: () => null
-                }
-            ]
-        });
-    }
-
-    // Mise à jour d'une tâche
-    const sendUpdateTask = (formData: any) => {
-        setOpenUpdateForm('');
-        const update = async (taskUpdate: Task) => {
-            await updateTask(taskUpdate);
-            window.location.reload();
-        }
-        update(formData);
+    // Affichage s'il n'y a aucune tâches
+    if (tasks.length === 0) {
+        return (<h1>Aucune tâches</h1>);
     }
 
     // Retour du tableau de tâches
@@ -75,8 +35,8 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
                 <tbody>
                     {/* Lignes du tableau */}
                     {tasks?.map((task, key) => {
-                        // Recherche de l'utilisateur de la tâche
-                        const user = users.find(user => user?._id === task.userId);
+                        // Recherche de l'utilisateur correspondant à la tâche
+                        const user = users.find(user => user._id === task.userId);
                         return (
                             <tr key={key}>
                                 {/* Lien vers la liste des tâches pour l'utilisateur */}
@@ -100,29 +60,16 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
 
                                 {/* Actions de la tâche */}
                                 <td>
-                                    {/* Boutton de modification */}
-                                    <button className='iconButton' onClick={() => setOpenUpdateForm(task._id)} title="Modifier">
-                                        <IoPencilSharp/>
-                                    </button>
-                                    <Modal
-                                        isOpen={isOpenUpdateForm === task._id}
-                                        onClose={() => setOpenUpdateForm('')}
-                                        title="Modifier un utilisateur"
-                                        content={<TaskForm onSubmit={sendUpdateTask} task={task} userId={task.userId}/>}
-                                    />
-
-                                    {/* Boutton de suppression */}
-                                    <button className='iconButton' onClick={() => alertDeleteTask(task)} title="Supprimer">
-                                        <IoTrashBinSharp/>
-                                    </button>
+                                    <TaskUpdateButton task={task}/>
+                                    <TaskDeleteButton task={task}/>
                                 </td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
         </div>
-    )
+    );
 }
 
-export default TaskTable
+export default TaskTable;
