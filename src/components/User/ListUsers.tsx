@@ -13,6 +13,7 @@ const ListUsers: FC = () => {
     const [isOpenUpdateForm, setOpenUpdateForm] = useState('');
     const [refresh, setRefresh] = useState(0);
 
+    // Alerte de confirmation de suppression d'un utilisateur
     const alertDeleteUser = (user: User) => {
         confirmAlert({
             title: 'Confirmation de suppression',
@@ -32,6 +33,7 @@ const ListUsers: FC = () => {
         });
     }
 
+    // Récupération des utilisateurs
     useEffect(() => {
         async function getData() {
             const users: User[] = await getUsers();
@@ -40,16 +42,17 @@ const ListUsers: FC = () => {
         getData();
     }, [refresh]);
 
-
+    // Création d'un nouvel utilisateur
     const sendNewUser = (userData: any) => {
         setOpenForm(false);
-        const add = async (userAdd: User) => {
-            const user = await createUser(userAdd);
+        const addUser = async (user: User) => {
+            await createUser(user);
             setRefresh(refresh + 1);
         }
-        add(userData);
+        addUser(userData);
     }
 
+    // Mise à jour d'un utilisateur
     const sendUpdateUser = (formData: any) => {
         setOpenUpdateForm('');
         const update = async (userUpdate: User) => {
@@ -59,6 +62,7 @@ const ListUsers: FC = () => {
         update(formData);
     }
 
+    // Retour de l'affichage
     return (
         <div>
             <div>

@@ -15,6 +15,16 @@ const TaskList: FC = () => {
         getData();
     });
 
+    // Affichage s'il n'y a pas de tâches
+    if (tasks.length === 0) {
+        return (
+            <div>
+                <h1>Aucune tâches</h1>
+            </div>
+        );
+    }
+
+    // Affichage des tâches
     return (
         <div>
             <h2>Liste des tâches</h2>

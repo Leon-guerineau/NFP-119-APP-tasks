@@ -24,7 +24,7 @@ const TaskListByUser: FC = () => {
         }
         getData();
 
-    }, [refresh]);
+    }, [refresh, userId]);
 
     if (!user) {
         return <div>Loading...</div>;
@@ -37,6 +37,24 @@ const TaskListByUser: FC = () => {
             setRefresh(refresh + 1);
         }
         add(formData);
+    }
+
+    if (tasks.length === 0) {
+        return (
+            <div>
+                <h2>Aucune tâches</h2>
+
+                <div>
+                    <button onClick={() => setOpenForm(true)}>Ajouter une tâche</button>
+                    <Modal
+                        isOpen={isOpenForm}
+                        onClose={() => setOpenForm(false)}
+                        title="Enregistrer une tâche"
+                        content={<TaskForm onSubmit={sendNewTask} userId={user._id}/>}
+                    />
+                </div>
+            </div>
+        );
     }
 
     return (

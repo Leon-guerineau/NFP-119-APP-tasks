@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import User from "../../types/User";
 import Task from "../../types/Task";
 
 interface FormProps {
