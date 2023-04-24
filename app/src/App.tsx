@@ -1,28 +1,27 @@
-import React, {FC} from 'react';
-import logo from './assets/logo.svg';
-import './css/App.css';
-import Title from "./components/Title";
+import {FC} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Layout from './components/Layout';
+import UserList from './pages/UserList'
+import TaskList from './pages/TaskList';
+import TaskListByUser from "./pages/TaskListByUser";
 
-const App : FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Title title='Application de gestion de Tâches' subtitle='Liste des utilisateurs'/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: FC = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    {/*Liste des utilisateurs*/}
+                    <Route path="/" element={<UserList/>}/>
+
+                    {/*Liste des tâches*/}
+                    <Route path="/tasks" element={<TaskList/>}/>
+
+                    {/*Liste des tâches pour un utilisateur*/}
+                    <Route path="/users/:userId/tasks" element={<TaskListByUser/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

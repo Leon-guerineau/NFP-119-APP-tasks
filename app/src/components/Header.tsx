@@ -1,8 +1,14 @@
-import React, {FC} from "react";
+import { FC } from "react";
+import Navbar from "./NavBar";
 
-const Header : FC = () => {
+const Header:FC = () => {
     return (
-        <h1>Header</h1>
+        <div>
+            <div className="hero">
+                <h1>Gestion utilisateurs tâches</h1>
+            </div>
+            <Navbar/>
+        </div>
     )
 }
 
