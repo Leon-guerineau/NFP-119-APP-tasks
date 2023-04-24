@@ -1,6 +1,5 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {Link} from 'react-router-dom';
-import {getUser} from "../../services/user.service";
 import Task from "../../types/Task";
 import User from "../../types/User";
 import TaskDeleteButton from "./TaskDeleteButton";
@@ -8,19 +7,15 @@ import TaskUpdateButton from "./TaskUpdateButton";
 
 interface Props {
     tasks: Task[];
+    users: User[];
 }
 
-const TaskTable: FC<Props> = ({ tasks }: Props) => {
-    const [users, setUsers] = useState<User[]>([]);
+const TaskTable: FC<Props> = ({tasks, users}: Props) => {
 
-    // Récupération des utilisateurs de chaque tâche
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const users = await Promise.all(tasks.map(task => getUser(task.userId)));
-            setUsers(users);
-        }
-        fetchUsers();
-    });
+    // Affichage s'il n'y a aucune tâches
+    if (tasks.length === 0) {
+        return (<h1>Aucune tâches</h1>);
+    }
 
     // Retour du tableau de tâches
     return (
@@ -40,8 +35,8 @@ const TaskTable: FC<Props> = ({ tasks }: Props) => {
                 <tbody>
                     {/* Lignes du tableau */}
                     {tasks?.map((task, key) => {
-                        // Recherche de l'utilisateur de la tâche
-                        const user = users.find(user => user?._id === task.userId);
+                        // Recherche de l'utilisateur correspondant à la tâche
+                        const user = users.find(user => user._id === task.userId);
                         return (
                             <tr key={key}>
                                 {/* Lien vers la liste des tâches pour l'utilisateur */}

@@ -39,24 +39,6 @@ const TaskListByUser: FC = () => {
         add(formData);
     }
 
-    if (tasks.length === 0) {
-        return (
-            <div>
-                <h2>Aucune tâches</h2>
-
-                <div>
-                    <button onClick={() => setOpenForm(true)}>Ajouter une tâche</button>
-                    <Modal
-                        isOpen={isOpenForm}
-                        onClose={() => setOpenForm(false)}
-                        title="Enregistrer une tâche"
-                        content={<TaskForm onSubmit={sendNewTask} userId={user._id}/>}
-                    />
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div>
             <h2>Tâches de : {user.email}</h2>
@@ -71,7 +53,7 @@ const TaskListByUser: FC = () => {
                 />
             </div>
 
-            <TaskTable tasks={tasks}/>
+            <TaskTable tasks={tasks} users={[user]}/>
         </div>
     )
 }
