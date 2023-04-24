@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {IoTrashBinSharp} from 'react-icons/io5';
 import {confirmAlert} from 'react-confirm-alert';
 import * as UserService from '../../services/user.service';
+import * as TaskService from '../../services/task.service';
 import User from "../../types/User";
 
 interface Props {
@@ -14,11 +15,12 @@ const UserDeleteButton: FC<Props> = ({user}: Props) => {
     const alertDeleteUser = (user: User) => {
         confirmAlert({
             title: 'Confirmation de suppression',
-            message: `Êtes vous sûr de vouloir supprimer l'utilisateur : ${user.name} (${user.email}) ?`,
+            message: `Êtes-vous sûr de vouloir supprimer l'utilisateur : ${user.name} (${user.email}) et toutes ces tâches?`,
             buttons: [
                 {
                     label: 'Oui',
                     onClick: () => {
+                        TaskService.deleteTasksByUserId(user._id);
                         UserService.deleteUser(user);
                         window.location.reload();
                     }

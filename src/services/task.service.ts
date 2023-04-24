@@ -26,6 +26,19 @@ export async function getTasksByUserId(userId: any)
     }
 }
 
+export async function deleteTasksByUserId(userId: any)
+{
+    const requestOptions = {
+        method: 'DELETE',
+    };
+    try {
+        const response = await fetch('http://localhost:8080/users/' + userId + '/tasks', requestOptions);
+        return await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function createTask(task: Task)
 {
     const requestOptions = {
