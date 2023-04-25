@@ -27,7 +27,6 @@ const UserForm = ({onSubmit, user}: FormProps) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         onSubmit(formData);
-        setFormData({_id: "", name: "", email: ""});
     };
 
     return (

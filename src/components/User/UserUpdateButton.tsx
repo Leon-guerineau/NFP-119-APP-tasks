@@ -4,6 +4,7 @@ import * as UserService from '../../services/user.service';
 import User from "../../types/User";
 import Modal from '../Modal';
 import UserForm from './UserForm';
+import {toast} from "react-toastify";
 
 interface Props {
     user: User;
@@ -12,12 +13,18 @@ interface Props {
 const UserUpdateButton: FC<Props> = ({user}: Props) => {
     const [isOpenForm, setOpenForm] = useState('');
 
-    // Mise Ã  jour d'un utilisateur
+    // Mise à jour d'un utilisateur
     const sendUpdateUser = (formData: any) => {
-        setOpenForm('');
         const update = async (userUpdate: User) => {
-            await UserService.updateUser(userUpdate);
-            window.location.reload();
+            const result = await UserService.updateUser(userUpdate);
+
+            if (result.error?.code === 11000) {
+                toast.warning('L\'email '+formData.email+' est déjà utilisé');
+                setOpenForm(user._id)
+            } else {
+                toast.success('Utilisateur '+formData.email+' modifié');
+                setOpenForm('');
+            }
         }
         update(formData);
     }

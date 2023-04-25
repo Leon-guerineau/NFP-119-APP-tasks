@@ -15,7 +15,7 @@ const UserList: FC = () => {
         }
 
         getData();
-    });
+    },[users]);
 
     // Retour de L'affichage
     return (

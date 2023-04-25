@@ -10,6 +10,16 @@ interface Props {
 }
 
 const UserTable: FC<Props> = ({users}: Props) => {
+
+    if (!users) {
+        return (
+            <span>
+                <meta httpEquiv="refresh" content="3"/>
+                <h1>wait</h1>
+            </span>
+        );
+    }
+
     // Affichage s'il n'y a aucun utilisateur
     if (users.length === 0) {
         return (<h1>Aucun utilisateur</h1>);

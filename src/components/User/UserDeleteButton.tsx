@@ -22,7 +22,6 @@ const UserDeleteButton: FC<Props> = ({user}: Props) => {
                     onClick: () => {
                         TaskService.deleteTasksByUserId(user._id);
                         UserService.deleteUser(user);
-                        window.location.reload();
                     }
                 },
                 {

@@ -1,4 +1,5 @@
 import User from '../types/User';
+import {toast} from "react-toastify";
 
 export async function getUsers()
 {
@@ -48,10 +49,18 @@ export async function updateUser(user: User)
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
+
+    // Si l'email est vide
+    if (user.email === ''){
+        toast.warning('Veuillez renseigner l\'email');
+        return;
+    }
+
     try {
         const response: Response = await fetch('http://localhost:8080/users/' + user._id, requestOptions);
-        return await response.json();
+        return response.json();
     } catch (error) {
+        toast.error('Une Erreur est survenue');
         console.log(error);
     }
 }
