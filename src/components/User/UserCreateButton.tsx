@@ -3,16 +3,27 @@ import * as UserService from '../../services/user.service';
 import User from "../../types/User";
 import Modal from '../Modal';
 import UserForm from './UserForm';
+import {toast} from "react-toastify";
+import {log} from "util";
 
 const UserCreateButton: FC = () => {
     const [isOpenForm, setOpenForm] = useState(false);
 
     // Création d'un nouvel utilisateur
     const sendNewUser = (userData: any) => {
-        setOpenForm(false);
         const addUser = async (user: User) => {
-            await UserService.createUser(user);
-            window.location.reload();
+            if (user.email === '') {
+                toast.warning('L\'email ne peut être vide');
+                return;
+            }
+            const result = await UserService.createUser(user);
+            // Gestion de l'erreur 'Duplicated key'
+            if (result.error?.code === 11000) {
+                toast.warning('L\'email '+user.email+' est déjà utilisé');
+            } else {
+                toast.success('Utilisateur '+user.email+' créé avec succès');
+                setOpenForm(false);
+            }
         }
         addUser(userData);
     }

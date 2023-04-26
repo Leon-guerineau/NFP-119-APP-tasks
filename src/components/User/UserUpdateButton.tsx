@@ -16,13 +16,20 @@ const UserUpdateButton: FC<Props> = ({user}: Props) => {
     // Mise à jour d'un utilisateur
     const sendUpdateUser = (formData: any) => {
         const update = async (userUpdate: User) => {
+            // Si l'email est vide
+            if (user.email === ''){
+                toast.warning('Veuillez renseigner l\'email');
+                return;
+            }
+
+            // Mise à jour de l'utilisateur
             const result = await UserService.updateUser(userUpdate);
 
+            // Gestion de l'erreur 'Duplicated key'
             if (result.error?.code === 11000) {
                 toast.warning('L\'email '+formData.email+' est déjà utilisé');
-                setOpenForm(user._id)
             } else {
-                toast.success('Utilisateur '+formData.email+' modifié');
+                toast.success('Utilisateur '+formData.email+' modifié avec succès');
                 setOpenForm('');
             }
         }

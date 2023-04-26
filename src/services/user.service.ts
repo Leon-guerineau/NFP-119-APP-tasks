@@ -8,8 +8,9 @@ export async function getUsers()
     };
     try {
         const response = await fetch('http://localhost:8080/users', requestOptions);
-        return await response.json();
+        return response.json();
     } catch (error) {
+        toast.error('Une Erreur est survenue');
         console.log(error);
     }
 }
@@ -23,8 +24,9 @@ export async function createUser(user: User)
     };
     try {
         const response = await fetch('http://localhost:8080/users', requestOptions);
-        return await response.json();
+        return response.json();
     } catch (error) {
+        toast.error('Une Erreur est survenue');
         console.log(error);
     }
 }
@@ -36,8 +38,9 @@ export async function getUser(userId: any)
     };
     try {
         const response = await fetch('http://localhost:8080/users/' + userId, requestOptions);
-        return await response.json();
+        return response.json();
     } catch (error) {
+        toast.error('Une Erreur est survenue');
         console.log(error);
     }
 }
@@ -49,13 +52,6 @@ export async function updateUser(user: User)
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
-
-    // Si l'email est vide
-    if (user.email === ''){
-        toast.warning('Veuillez renseigner l\'email');
-        return;
-    }
-
     try {
         const response: Response = await fetch('http://localhost:8080/users/' + user._id, requestOptions);
         return response.json();
@@ -73,6 +69,7 @@ export async function deleteUser(user: User)
     try {
         await fetch('http://localhost:8080/users/' + user._id, requestOptions);
     } catch (error) {
+        toast.error('Une Erreur est survenue');
         console.log(error);
     }
 }

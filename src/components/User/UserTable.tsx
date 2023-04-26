@@ -15,7 +15,7 @@ const UserTable: FC<Props> = ({users}: Props) => {
         return (
             <span>
                 <meta httpEquiv="refresh" content="3"/>
-                <h1>wait</h1>
+                <h1>Chargement</h1>
             </span>
         );
     }
